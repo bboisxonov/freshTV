@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +8,56 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
 
-    <form class="site-form">
-        <input class="title_input" type="text" name="title" placeholder="Title" >
-        <input class="description_input" type="text" name="description" placeholder="Description" >
-        <input class="year_input" type="number" name="year" placeholder="Release year" >
-        <input class="genre_input" type="text" name="genre" placeholder="Genres" >
-        <input class="img_input" type="text" name="img" placeholder="Link of img" >
+    <section class="container main_section">
+        <nav class="navbar">
 
-        <button class="film-creator" type="submit">ADD</button>
-    </form>
+            <a href="./index.html">
+                <img class="site-logo" src="./img/freshtv-logotip.png" alt="site logo">
+            </a>
+            <ul class="nav_list">
+                <!-- <form class="search_form">
+                    <button type="submit" style="display: none;"></button>
+                </form> -->
+                <input class="search_input" type="search" id="search_button" autocomplete="off" placeholder="Search...">
+                <span class="input_remove_sign">+</span>
+                <label for="search_button">
+                    <div class="search_button"></div>
+                </label>
+                <select class="form_select global_input ">
+                    <option class="default_option">All Genres</option>
+                </select>
+                <button class="filter_button film-creator">Filter</button>
+                <button class="film-creator open_form_btn" type="submit"></button> <br>
 
-    <ul class="cards"></ul>
+            </ul>
+        </nav>
+
+        <form class="site-form">
+            <input class="title_input global_input" type="text" name="title" placeholder="Title">
+            <input class="description_input global_input" type="text" name="description" placeholder="Description">
+            <input class="year_input global_input" type="date" name="year">
+            <input class="genre_input global_input" type="text" name="genre" placeholder="Genres">
+            <input class="img_input global_input" type="text" name="img" placeholder="Link of img">
+
+            <div>
+                <button class="film-creator" type="submit">ADD</button> <br>
+                <span class="resolution_text" style="color: red; position: absolute;"></span>
+            </div>
+        </form>
+        <div class="filter_box">
+
+
+        </div>
+        <ul class="cards"></ul>
+    </section>
+
+
 
     <script src="./js/films.js"></script>
     <script src="./js/main.js"></script>
 </body>
+
 </html>
