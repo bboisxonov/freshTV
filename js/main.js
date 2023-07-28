@@ -1,4 +1,25 @@
-let elCardUl = document.querySelector('.cards');
+//Getting elements
+
+let elCardUl = document.querySelector('.cards'),
+    elMainSection = document.querySelector('.main_section'),
+    elSearchButton = document.querySelector('.search_button'),
+    // elSearchSection = document.querySelector('.search-section_active'),
+    elInputRemoveSign = document.querySelector('.input_remove_sign'),
+    elShowFormButton = document.querySelector('.open_form_btn'),
+    elSearchInput = document.querySelector('.search_input'),
+    elNavList = document.querySelector('.nav_list'),
+    elSiteNavForm = document.querySelector('.site_nav_form'),
+    elTitleInput = document.querySelector('.title_input'),
+    elDescriptionInput = document.querySelector('.description_input'),
+    elYearInput = document.querySelector('.year_input'),
+    elImgInput = document.querySelector('.img_input'),
+    elGenreInput = document.querySelector('.genre_input'),
+    elSiteForm = document.querySelector('.site-form'),
+    elSubmitBtn = document.querySelector('.film-creator'),
+    elResolutionText = document.querySelector('.resolution_text'),
+    elFormSelect = document.querySelector('.form_select'),
+    elFilterButton = document.querySelector('.filter_button'),
+    elDefaultGenre = document.querySelector(".default_option");
 
 function normalizeTime(format) {
     var newDate = new Date(format),
@@ -47,24 +68,27 @@ function renderingFilms(filmsArray) {
 
         elCardUl.appendChild(newLi)
     }
-
 }
-
-
-//Getting elements
-
-let elTitleInput = document.querySelector('.title_input'),
-    elDescriptionInput = document.querySelector('.description_input'),
-    elYearInput = document.querySelector('.year_input'),
-    elImgInput = document.querySelector('.img_input'),
-    elGenreInput = document.querySelector('.genre_input'),
-    elSiteForm = document.querySelector('.site-form'),
-    elSubmitBtn = document.querySelector('.film-creator'),
-    elResolutionText = document.querySelector('.resolution_text')
-
-
 renderingFilms(films)
 
+function filteringGenres() {
+    var newGenres = []
+
+    films.forEach(film => {
+        film.genres.forEach(genre => {
+            if (!newGenres.includes(genre)) { newGenres.push(genre) }
+        })
+    })
+
+    newGenres.forEach(item => {
+        var newOption = document.createElement('option')
+
+        newOption.textContent = item
+
+        elFormSelect.appendChild(newOption)
+    })
+}
+filteringGenres()
 
 elSiteForm.addEventListener('submit', (evt) => {
     evt.preventDefault()
@@ -83,7 +107,6 @@ elSiteForm.addEventListener('submit', (evt) => {
             release_date: "",
             genres: []
         }
-
         newFilm.title = elTitleInput.value
         newFilm.poster = elImgInput.value
         newFilm.overview = elDescriptionInput.value
@@ -98,78 +121,34 @@ elSiteForm.addEventListener('submit', (evt) => {
         elImgInput.value = ''
         elGenreInput.value = ''
     }
-
-})
-var newGenres = []
-
-films.forEach(item => {
-    var newGenre = ""
-
-    newGenre = item.genres
-
-    newGenres.push(newGenre)
 })
 
-newGenres = newGenres.join(',').split(',')
+elSiteNavForm.addEventListener("submit", (evt) => {
+    evt.preventDefault()
 
-var finalGenres = []
+    const searchValue = elSearchInput.value.trim();
+    const selectValue = elFormSelect.value.trim();
 
-newGenres.forEach(item => {
+    let filterByGenre = []
+    if (selectValue === 'All') {
+        filterByGenre = films
 
-    var newTypeOfGenre = ""
-
-    newTypeOfGenre = item
-
-    if (!finalGenres.includes(newTypeOfGenre) && newTypeOfGenre != "") {
-
-        finalGenres.push(newTypeOfGenre)
-
+    } else {
+        filterByGenre = films.filter(film =>
+            film.genres.includes(selectValue)
+        )
     }
+
+    let regex = RegExp(searchValue, 'gi')
+
+    let filterBySearch = filterByGenre.filter(film =>
+        film.title.match(regex)
+    )
+    elCardUl.textContent = ""
+    renderingFilms(filterBySearch)
 })
-
-var elFormSelect = document.querySelector('.form_select')
-var elFilterButton = document.querySelector('.filter_button')
-var elDefaultGenre = document.querySelector(".default_option")
-
-finalGenres.forEach(item => {
-    var newOption = document.createElement('option')
-
-    newOption.textContent = item
-
-    elFormSelect.appendChild(newOption)
-})
-
-elFilterButton.addEventListener('click', () => {
-    let valueOfSelect = elFormSelect.value
-
-    let filteredMovies = []
-
-    films.forEach(item => {
-        let genresOfFlims = item.genres
-        if (genresOfFlims.includes(valueOfSelect)) {
-            elCardUl.textContent = ""
-            filteredMovies.push(item)
-        } else if (valueOfSelect == "All Genres") {
-            elCardUl.textContent = ''
-            renderingFilms(films)
-        }
-    })
-    renderingFilms(filteredMovies)
-
-})
-let elMainSection = document.querySelector('.main_section'),
-    elSearchButton = document.querySelector('.search_button'),
-    // elSearchSection = document.querySelector('.search-section_active'),
-    elInputRemoveSign = document.querySelector('.input_remove_sign'),
-    elShowFormButton = document.querySelector('.open_form_btn'),
-    elSearchInput = document.querySelector('.search_input'),
-    elNavList = document.querySelector('.nav_list');
-
 
 elSearchButton.addEventListener('click', () => {
-    if (elNavList.classList.contains('search_input--active')) {
-        console.log('done');
-    }
     elNavList.classList.add('search_input--active')
     setTimeout(() => {
         elInputRemoveSign.style.display = "block"
@@ -178,52 +157,15 @@ elSearchButton.addEventListener('click', () => {
         elInputRemoveSign.style.transform = "rotate(135deg)"
 
     }, 90);
-
 })
+
 elInputRemoveSign.addEventListener('click', () => {
     elNavList.classList.remove('search_input--active')
     elInputRemoveSign.style.display = "none"
     elInputRemoveSign.style.transform = "rotate(45deg)"
-
 })
+
 elShowFormButton.addEventListener('click', () => {
     elMainSection.classList.toggle('form_active')
     elShowFormButton.classList.toggle('close_form_btn')
 })
-
-document.querySelector('#search_button').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        let searchInputValue = elSearchInput.value
-        let searchedMovies = []
-
-        films.forEach(item => {
-            let namesOfFilms = item.title
-            if (namesOfFilms.includes(searchInputValue)) {
-                elCardUl.textContent = ""
-                searchedMovies.push(item)
-            }
-
-        })
-        renderingFilms(searchedMovies)
-    }
-});
-// document.querySelector('#search_button').addEventListener('keypress', (evt) => {
-//     if (evt.target.tagName = "BUTTON") {
-
-//         let searchInputValue = elSearchInput.value
-
-//         let searchedMovies = []
-
-//         films.forEach(item => {
-//             let namesOfFilms = item.title
-//             if (namesOfFilms.includes(searchInputValue)) {
-//                 elCardUl.textContent = ""
-//                 searchedMovies.push(item)
-//             }
-
-//         })
-//         renderingFilms(searchedMovies)
-
-//     }
-
-// });

@@ -65,7 +65,7 @@ li{
   box-shadow: 0 0 10px 1px #084968;
   padding-right: 20px;
   margin: 0 5px;
-  outline-offset: 5px;
+  /* outline-offse  t: 5px; */
 }
 .global_input::placeholder{
   color: #084968;
@@ -78,7 +78,7 @@ li{
   border: none;
   outline: none;
   padding: 10px 30px;
-  margin-bottom: 12px;
+  margin: 0 10px 12px 10px;
   transition: all .1s ease-in-out;
   border-radius: 10px;
   background: linear-gradient(to top right, #cfd9dda1, rgba(0, 255, 255, 0.205));
@@ -87,7 +87,7 @@ li{
 }
 .film-creator:active{
   /* box-shadow: 0 0px 5px #084968; */
-  transform: perspective(900px) translateZ(-50px);
+  transform: perspective(1900px) translateZ(-50px);
   box-shadow:  0 0 0 1px #084968;
 }
 /* .filter_box{
@@ -133,6 +133,12 @@ li{
   margin-left: auto;
   width: 44%;
 }
+.site_nav_form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+}
 .site-logo{
   width: 175px;
   height: 45px;
@@ -141,7 +147,6 @@ li{
   opacity: 0;
   cursor: default;
   width: 10%;
-  /* text-transform: capitalize; */
 }
 .search_input--active .search_input{
   opacity: 1;
@@ -154,7 +159,6 @@ li{
   box-shadow: 0 0 10px 3px #084a6844;
   width: 28%;
   cursor: text;
-
 }
 .form_active .site-form{
   display: flex;
