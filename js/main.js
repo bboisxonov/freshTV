@@ -71,7 +71,7 @@ function renderingFilms(filmsArray) {
         elCardUl.appendChild(newLi)
     }
 }
-sortTitle(films)
+sortTitle(films, 1, -1)
 renderingFilms(films)
 
 function sortTitle(array, tostart, toend) {
@@ -116,28 +116,6 @@ function filteringGenres() {
     })
 }
 filteringGenres()
-
-
-function sortingFilms() {
-    elSortSelect.addEventListener('change', () => {
-        let sortValue = elSortSelect.value
-        if (sortValue == "a-z") {
-            sortTitle(films, 1, -1)
-            renderingFilms(films)
-        } else if (sortValue == "z-a") {
-            sortTitle(films, -1, 1)
-            renderingFilms(films)
-        } else if (sortValue == "old-new") {
-            sortFilmsReleaseYears(films, 1, -1)
-            renderingFilms(films)
-        } else if (sortValue == "new-old") {
-            sortFilmsReleaseYears(films, -1, 1)
-            renderingFilms(films)
-        }
-
-    })
-}
-sortingFilms()
 
 elSiteForm.addEventListener('submit', (evt) => {
     evt.preventDefault()
@@ -192,8 +170,23 @@ elSiteNavForm.addEventListener("submit", (evt) => {
     let filterBySearch = filterByGenre.filter(film =>
         film.title.match(regex)
     )
-    elCardUl.textContent = ""
     renderingFilms(filterBySearch)
+
+    let sortValue = elSortSelect.value
+
+    if (sortValue == "a-z") {
+        sortTitle(filterBySearch, 1, -1)
+        renderingFilms(filterBySearch)
+    } else if (sortValue == "z-a") {
+        sortTitle(filterBySearch, -1, 1)
+        renderingFilms(filterBySearch)
+    } else if (sortValue == "old-new") {
+        sortFilmsReleaseYears(filterBySearch, 1, -1)
+        renderingFilms(filterBySearch)
+    } else if (sortValue == "new-old") {
+        sortFilmsReleaseYears(filterBySearch, -1, 1)
+        renderingFilms(filterBySearch)
+    }
 })
 
 
