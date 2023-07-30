@@ -131,7 +131,7 @@ li{
   justify-content: space-between;
   width: 300px;
   margin-left: auto;
-  width: 44%;
+  width: 50%;
 }
 .site_nav_form{
   display: flex;
@@ -179,4 +179,5 @@ li{
   display: none;
   transition: all .4s ease-in-out;
   user-select: none;
+  padding: 0 8px;
 }
