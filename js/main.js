@@ -44,8 +44,6 @@ function renderingFilms(filmsArray) {
             newTime = document.createElement('time'),
             newUl = document.createElement('ul');
 
-        //Setting attributes
-
         newImg.setAttribute('src', filmsArray[i].poster)
         newImg.setAttribute('class', 'card_img')
         newLi.setAttribute('class', 'card')
