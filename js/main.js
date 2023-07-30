@@ -19,7 +19,8 @@ let elCardUl = document.querySelector('.cards'),
     elResolutionText = document.querySelector('.resolution_text'),
     elFormSelect = document.querySelector('.form_select'),
     elFilterButton = document.querySelector('.filter_button'),
-    elDefaultGenre = document.querySelector(".default_option");
+    elDefaultGenre = document.querySelector(".default_option"),
+    elSortSelect = document.querySelector(".sort-select");
 
 function normalizeTime(format) {
     var newDate = new Date(format),
@@ -31,6 +32,7 @@ function normalizeTime(format) {
 }
 
 function renderingFilms(filmsArray) {
+    elCardUl.textContent = ""
     for (let i = 0; i < filmsArray.length; i++) {
 
         //Creating new elements
@@ -69,7 +71,32 @@ function renderingFilms(filmsArray) {
         elCardUl.appendChild(newLi)
     }
 }
+sortTitle(films)
 renderingFilms(films)
+
+function sortTitle(array, tostart, toend) {
+    array.sort((a, b) => {
+        if (a.title > b.title) {
+            return tostart
+        } else if (a.title < b.title) {
+            return toend
+        } else {
+            return 0
+        }
+    })
+}
+
+function sortFilmsReleaseYears(array, tostart, toend) {
+    array.sort((a, b) => {
+        if (a.release_date < b.release_date) {
+            return toend
+        } else if (a.release_date > b.release_date) {
+            return tostart
+        } else {
+            return 0
+        }
+    })
+}
 
 function filteringGenres() {
     var newGenres = []
@@ -90,6 +117,28 @@ function filteringGenres() {
 }
 filteringGenres()
 
+
+function sortingFilms() {
+    elSortSelect.addEventListener('change', () => {
+        let sortValue = elSortSelect.value
+        if (sortValue == "a-z") {
+            sortTitle(films, 1, -1)
+            renderingFilms(films)
+        } else if (sortValue == "z-a") {
+            sortTitle(films, -1, 1)
+            renderingFilms(films)
+        } else if (sortValue == "old-new") {
+            sortFilmsReleaseYears(films, 1, -1)
+            renderingFilms(films)
+        } else if (sortValue == "new-old") {
+            sortFilmsReleaseYears(films, -1, 1)
+            renderingFilms(films)
+        }
+
+    })
+}
+sortingFilms()
+
 elSiteForm.addEventListener('submit', (evt) => {
     evt.preventDefault()
 
@@ -98,7 +147,6 @@ elSiteForm.addEventListener('submit', (evt) => {
         return
     } else {
         elResolutionText.textContent = ""
-        elCardUl.textContent = ''
 
         var newFilm = {
             title: "",
@@ -147,6 +195,7 @@ elSiteNavForm.addEventListener("submit", (evt) => {
     elCardUl.textContent = ""
     renderingFilms(filterBySearch)
 })
+
 
 elSearchButton.addEventListener('click', () => {
     elNavList.classList.add('search_input--active')
