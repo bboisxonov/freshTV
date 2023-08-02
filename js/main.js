@@ -236,13 +236,16 @@ elShowFormButton.addEventListener('click', () => {
 const bookMarkedFilms = []
 function bookmarkFilms(evt) {
     if (evt.target.matches('.bookmark-btn')) {
-        evt.target.classList.toggle('bookmark-btn__active')
+        evt.target.classList.add('bookmark-btn__active')
+
         films.forEach((film) => {
+            // if (!evt.target.classList.contains('bookmark-btn__active')) {
+            //     bookMarkedFilms.splice(film, 1)
+            // }
             if (film.id == evt.target.dataset.id && !bookMarkedFilms.includes(film)) {
                 bookMarkedFilms.push(film)
             }
         })
-        console.log(bookMarkedFilms);
     }
 }
 elCardUl.addEventListener('click', bookmarkFilms)

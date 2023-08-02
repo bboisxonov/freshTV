@@ -217,4 +217,5 @@ opacity: .9;
 .bookmark-btn__active{
   background: url("../img/save-white.png") no-repeat;
   background-size: 100% 100%;
+  
 }
