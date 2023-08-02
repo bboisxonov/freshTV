@@ -42,16 +42,28 @@ function renderingFilms(filmsArray) {
             newTitle = document.createElement('h3'),
             newDescription = document.createElement('p'),
             newTime = document.createElement('time'),
-            newUl = document.createElement('ul');
+            newUl = document.createElement('ul'),
+            moreInfoBtn = document.createElement('button'),
+            bookMarkBtn = document.createElement('button');
+
+        //Setting Attributes
 
         newImg.setAttribute('src', filmsArray[i].poster)
         newImg.setAttribute('class', 'card_img')
         newLi.setAttribute('class', 'card')
+        moreInfoBtn.setAttribute('class', 'card-btn more_info-btn')
+        bookMarkBtn.setAttribute('class', 'card-btn bookmark-btn')
+        newTitle.setAttribute('class', 'card-title')
+        newUl.setAttribute('class', 'card-info')
+
 
         //Assign Values
+
         newTitle.textContent = filmsArray[i].title
         newDescription.textContent = filmsArray[i].overview
         newTime.textContent = normalizeTime(filmsArray[i].release_date)
+        moreInfoBtn.textContent = 'More Info'
+        bookMarkBtn.textContent = 'Bookmark'
 
         for (let p = 0; p < filmsArray[i].genres.length; p++) {
             var newGenreLi = document.createElement('li')
@@ -60,11 +72,12 @@ function renderingFilms(filmsArray) {
         }
 
         //Appending elements
+
         newLi.appendChild(newImg)
         newLi.appendChild(newTitle)
-        newLi.appendChild(newDescription)
-        newLi.appendChild(newTime)
         newLi.appendChild(newUl)
+        newLi.appendChild(moreInfoBtn)
+        newLi.appendChild(bookMarkBtn)
 
         elCardUl.appendChild(newLi)
     }
