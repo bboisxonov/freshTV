@@ -50,7 +50,7 @@ function renderingFilms(filmsArray) {
             newTime = document.createElement('time'),
             newUl = document.createElement('ul'),
             moreInfoBtn = document.createElement('button'),
-            bookMarkBtn = document.createElement('button');
+            bookMarkBtn = document.createElement('img');
 
         //Setting Attributes
 
@@ -61,6 +61,7 @@ function renderingFilms(filmsArray) {
         moreInfoBtn.setAttribute('class', 'card-btn more_info-btn')
         moreInfoBtn.dataset.id = idOfFilms
         bookMarkBtn.setAttribute('class', 'card-btn bookmark-btn')
+        bookMarkBtn.setAttribute('class', 'bookmark-btn')
         bookMarkBtn.dataset.id = idOfFilms
         newTitle.setAttribute('class', 'card-title')
         newUl.setAttribute('class', 'card-info')
@@ -72,7 +73,6 @@ function renderingFilms(filmsArray) {
         newDescription.textContent = filmsArray[i].overview
         newTime.textContent = normalizeTime(filmsArray[i].release_date)
         moreInfoBtn.textContent = 'More Info'
-        bookMarkBtn.textContent = 'Bookmark'
 
         for (let p = 0; p < filmsArray[i].genres.length; p++) {
             var newGenreLi = document.createElement('li')
@@ -85,8 +85,8 @@ function renderingFilms(filmsArray) {
         newLi.appendChild(newImg)
         newLi.appendChild(newTitle)
         newLi.appendChild(newUl)
-        newLi.appendChild(moreInfoBtn)
         newLi.appendChild(bookMarkBtn)
+        newLi.appendChild(moreInfoBtn)
 
         elCardUl.appendChild(newLi)
     }
@@ -236,6 +236,7 @@ elShowFormButton.addEventListener('click', () => {
 const bookMarkedFilms = []
 function bookmarkFilms(evt) {
     if (evt.target.matches('.bookmark-btn')) {
+        evt.target.classList.toggle('bookmark-btn__active')
         films.forEach((film) => {
             if (film.id == evt.target.dataset.id && !bookMarkedFilms.includes(film)) {
                 bookMarkedFilms.push(film)

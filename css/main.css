@@ -187,7 +187,7 @@ opacity: .9;
 }
 .card-btn{
   width: 80%;
-  margin: 5px auto !important;
+  margin: 15px auto !important;
   background-color: #fff;
   padding: 10px 15px;
   border-radius: 15px;
@@ -202,4 +202,19 @@ opacity: .9;
 .card-btn:hover{
   color: #fff;
   background: #084968;
+}
+.bookmark-btn{
+  background: url("../img/save.png") no-repeat;
+  background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 79%;
+  left: 80%;
+  transition: .3s all ;
+
+}
+.bookmark-btn__active{
+  background: url("../img/save-white.png") no-repeat;
+  background-size: 100% 100%;
 }
