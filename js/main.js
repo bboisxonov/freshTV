@@ -20,7 +20,10 @@ let elCardUl = document.querySelector('.cards'),
     elFormSelect = document.querySelector('.form_select'),
     elFilterButton = document.querySelector('.filter_button'),
     elDefaultGenre = document.querySelector(".default_option"),
-    elSortSelect = document.querySelector(".sort-select");
+    elSortSelect = document.querySelector(".sort-select"),
+    elBookMarkBtn = document.querySelector(".bookmark-btn"),
+    elBookMarkOpenBtn = document.querySelector(".bookmarks_open-btn");
+
 
 function normalizeTime(format) {
     var newDate = new Date(format),
@@ -35,9 +38,12 @@ function renderingFilms(filmsArray) {
     elCardUl.textContent = ""
     for (let i = 0; i < filmsArray.length; i++) {
 
+        let idOfFilms = i + 1
+
+        filmsArray[i].id = idOfFilms
         //Creating new elements
 
-        var newLi = document.createElement('li'),
+        let newLi = document.createElement('li'),
             newImg = document.createElement('img'),
             newTitle = document.createElement('h3'),
             newDescription = document.createElement('p'),
@@ -51,8 +57,11 @@ function renderingFilms(filmsArray) {
         newImg.setAttribute('src', filmsArray[i].poster)
         newImg.setAttribute('class', 'card_img')
         newLi.setAttribute('class', 'card')
+        newLi.dataset.id = idOfFilms
         moreInfoBtn.setAttribute('class', 'card-btn more_info-btn')
+        moreInfoBtn.dataset.id = idOfFilms
         bookMarkBtn.setAttribute('class', 'card-btn bookmark-btn')
+        bookMarkBtn.dataset.id = idOfFilms
         newTitle.setAttribute('class', 'card-title')
         newUl.setAttribute('class', 'card-info')
 
@@ -110,7 +119,7 @@ function sortFilmsReleaseYears(array, tostart, toend) {
 }
 
 function filteringGenres() {
-    var newGenres = []
+    const newGenres = []
 
     films.forEach(film => {
         film.genres.forEach(genre => {
@@ -221,4 +230,23 @@ elInputRemoveSign.addEventListener('click', () => {
 elShowFormButton.addEventListener('click', () => {
     elMainSection.classList.toggle('form_active')
     elShowFormButton.classList.toggle('close_form_btn')
+})
+
+// moreInfoBtn
+const bookMarkedFilms = []
+function bookmarkFilms(evt) {
+    if (evt.target.matches('.bookmark-btn')) {
+        films.forEach((film) => {
+            if (film.id == evt.target.dataset.id && !bookMarkedFilms.includes(film)) {
+                bookMarkedFilms.push(film)
+            }
+        })
+        console.log(bookMarkedFilms);
+    }
+}
+elCardUl.addEventListener('click', bookmarkFilms)
+
+elBookMarkOpenBtn.addEventListener('click', () => {
+    renderingFilms(bookMarkedFilms)
+
 })
