@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="./img/ftv-high-resolution-color-logo (1).png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshTV Uzbekistan - Watch Movies Online</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+    <section class="container main_section">
+        <nav class="navbar">
+
+            <a href="./index.html">
+                <img class="site-logo" src="./img/freshtv-logotip.png" alt="site logo">
+            </a>
+            <ul class="nav_list">
+                <form class="site_nav_form">
+                    <input class="search_input" id="search_button" autocomplete="off" placeholder="Search...">
+                    <span class="input_remove_sign">+</span>
+                    <label for="search_button">
+                        <div class="search_button"></div>
+                    </label>
+                    <select class="form_select global_input">
+                        <option class="default_option" value="All">All Genres</option>
+                    </select>
+                    <button class="filter_button film-creator" type="submit">Filter</button>
+                    <select class="sort-select global_input">
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="old-new">old-new</option>
+                        <option value="new-old">new-old</option>
+                    </select>
+                    <button class="film-creator open_form_btn"></button>
+
+                </form>
+
+            </ul>
+        </nav>
+
+        <form class="site-form">
+            <input class="title_input global_input" type="text" name="title" placeholder="Title">
+            <input class="description_input global_input" type="text" name="description" placeholder="Description">
+            <input class="year_input global_input" type="date" name="year">
+            <input class="genre_input global_input" type="text" name="genre" placeholder="Genres">
+            <input class="img_input global_input" type="text" name="img" placeholder="Link of img">
+
+            <div>
+                <button class="film-creator" type="submit">ADD</button> <br>
+                <span class="resolution_text" style="color: red; position: absolute;"></span>
+            </div>
+        </form>
+        <div class="filter_box">
+
+
+        </div>
+        <button class="film-creator bookmarks_open-btn" type="submit">Bookmarks</button> <br>
+        <ul class="cards">
+        </ul>
+    </section>
+    <section class="modal">
+        <div class="card_info">
+            <h2 class="card_modal-title"></h2>
+            <p class="card_modal-description"></p>
+            <p class="card_modal-release"></p>
+            <h3 class="card_modal-genres"></h3>
+            <h3 style="font-size: 25px;">16+</h3>
+            <h2 class="modal_close-sign">+</h2>
+
+            <h2 class="imdb-score">IMDb: <span class="imdb-score-random"></span></h2>
+        </div>
+    </section>
+
+
+    <script src="./js/films.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
