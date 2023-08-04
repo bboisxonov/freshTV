@@ -22,7 +22,14 @@ let elCardUl = document.querySelector('.cards'),
     elDefaultGenre = document.querySelector(".default_option"),
     elSortSelect = document.querySelector(".sort-select"),
     elBookMarkBtn = document.querySelector(".bookmark-btn"),
-    elBookMarkOpenBtn = document.querySelector(".bookmarks_open-btn");
+    elBookMarkOpenBtn = document.querySelector(".bookmarks_open-btn"),
+    elCardInfoModal = document.querySelector(".modal"),
+    elCardModalTitle = document.querySelector(".card_modal-title"),
+    elCardModalDescription = document.querySelector(".card_modal-description"),
+    elCardModalYear = document.querySelector(".card_modal-release"),
+    elCardModalGenres = document.querySelector(".card_modal-genres"),
+    elModalCloseBtn = document.querySelector(".modal_close-sign"),
+    elCardModalRandomNumber = document.querySelector(".imdb-score-random");
 
 function normalizeTime(format) {
     var newDate = new Date(format),
@@ -231,16 +238,6 @@ elShowFormButton.addEventListener('click', () => {
     elShowFormButton.classList.toggle('close_form_btn')
 })
 
-
-let elCardInfoModal = document.querySelector(".modal"),
-    elCardModalTitle = document.querySelector(".card_modal-title"),
-    elCardModalDescription = document.querySelector(".card_modal-description"),
-    elCardModalYear = document.querySelector(".card_modal-release"),
-    elCardModalGenres = document.querySelector(".card_modal-genres"),
-    elModalCloseBtn = document.querySelector(".modal_close-sign"),
-    elCardModalRandomNumber = document.querySelector(".imdb-score-random");
-
-// moreInfoBtn
 const bookMarkedFilms = []
 function bookmarkFilms(evt) {
     if (evt.target.matches('.bookmark-btn')) {
