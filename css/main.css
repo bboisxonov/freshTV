@@ -219,3 +219,53 @@ opacity: .9;
   background-size: 100% 100%;
   
 }
+
+.modal{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.753);
+  display: none;
+}
+.modal_close-sign{
+  position: absolute;
+  top: 0;
+  right: 15%;
+  color: white;
+  font-size: 70px;
+  cursor: pointer;
+  user-select: none;
+  transform: rotate(45deg);
+}
+.card_info{
+  width: 50%;
+  color: aliceblue;
+  text-align: center;
+  margin: 8% auto;
+}
+.card_modal-title{
+  font-size: 45px;
+  font-family: sans-serif;
+}
+.card_modal-description{
+  font-size: 21px;
+  font-family: sans-serif;
+  line-height: 1.3;
+}
+.card_modal-release{
+  font-size: 25px;
+}
+.card_modal-genres{
+  font-size: 22px;
+  font-family: monospace;
+}
+.imdb-score{
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  font-size: 30px;
+}
+.card_info-opener{
+  display: block;
+}

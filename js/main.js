@@ -24,7 +24,6 @@ let elCardUl = document.querySelector('.cards'),
     elBookMarkBtn = document.querySelector(".bookmark-btn"),
     elBookMarkOpenBtn = document.querySelector(".bookmarks_open-btn");
 
-
 function normalizeTime(format) {
     var newDate = new Date(format),
         day = String(newDate.getDate()).padStart(2, 0),
@@ -232,6 +231,15 @@ elShowFormButton.addEventListener('click', () => {
     elShowFormButton.classList.toggle('close_form_btn')
 })
 
+
+let elCardInfoModal = document.querySelector(".modal"),
+    elCardModalTitle = document.querySelector(".card_modal-title"),
+    elCardModalDescription = document.querySelector(".card_modal-description"),
+    elCardModalYear = document.querySelector(".card_modal-release"),
+    elCardModalGenres = document.querySelector(".card_modal-genres"),
+    elModalCloseBtn = document.querySelector(".modal_close-sign"),
+    elCardModalRandomNumber = document.querySelector(".imdb-score-random");
+
 // moreInfoBtn
 const bookMarkedFilms = []
 function bookmarkFilms(evt) {
@@ -246,6 +254,33 @@ function bookmarkFilms(evt) {
                 bookMarkedFilms.push(film)
             }
         })
+    }
+    if (evt.target.matches('.more_info-btn')) {
+        setTimeout(() => {
+            films.forEach((film) => {
+                if (film.id == evt.target.dataset.id) {
+                    let randomNumber = Math.random().toFixed(1)
+                    elCardInfoModal.classList.add('card_info-opener')
+
+                    elCardModalTitle.textContent = film.title
+                    elCardModalDescription.textContent = film.overview
+                    elCardModalYear.textContent = normalizeTime(film.release_date)
+                    elCardModalGenres.textContent = film.genres
+                    elCardModalRandomNumber.textContent = randomNumber * 10 + "." + Math.random().toFixed(1) * 10
+
+                    elModalCloseBtn.addEventListener('click', () => {
+                        elCardInfoModal.classList.remove('card_info-opener')
+
+                    })
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key == "Escape") {
+                            elCardInfoModal.classList.remove('card_info-opener')
+
+                        }
+                    })
+                }
+            })
+        }, 300);
     }
 }
 elCardUl.addEventListener('click', bookmarkFilms)
